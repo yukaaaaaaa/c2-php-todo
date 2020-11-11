@@ -17,6 +17,7 @@
             </tr>
             </tbody>
         </table>
+        
         @include('parts.button.back')
     </div>
 @endsection
