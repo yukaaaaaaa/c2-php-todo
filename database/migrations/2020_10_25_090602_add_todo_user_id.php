@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTodosTable extends Migration
+class AddTodoUserId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateTodosTable extends Migration
      */
     public function up()
     {
-        Schema::create('todos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->date('due_date');
-            $table->tinyInteger('status');
-            $table->timestamps();
+        Schema::table('todos', function (Blueprint $table) {
+            $table->foreignId('user_id')->after('id')->constrained();
         });
     }
 
@@ -29,6 +25,9 @@ class CreateTodosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todos');
+        Schema::table('todos', function (Blueprint $table) {
+            $table->dropForeign('todos_user_id_foreign');
+            $table->dropColumn('user_id');
+        });
     }
 }

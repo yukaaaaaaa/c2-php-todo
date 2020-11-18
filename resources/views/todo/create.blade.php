@@ -12,4 +12,4 @@
             @include('parts.button.back')
         </div>
     </div>
-@endsection 
+@endsection
