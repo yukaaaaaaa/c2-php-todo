@@ -13,7 +13,7 @@ class CreateTodoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class CreateTodoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "title" => "repuired",
+            "due_date" => "required|date_format:Y-m-d",
         ];
     }
 }
