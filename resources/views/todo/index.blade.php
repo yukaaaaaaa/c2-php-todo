@@ -10,9 +10,11 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>タイトル</th>
-                    <th>期限</th>
-                    <th></th>
+                    <th width="40%">タイトル</th>
+                    <th width="20%">期限</th>
+                    <th width="10%">状態</th>
+                    <th width="15%"></th>
+                    <th width="15%"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,8 +27,18 @@
                         </td>
                         <td>{{ $todo->due_date }}</td>
                         <td>
-                            <a href="/todo/{{ $todo->id }}/edit" class="btn btn-success"><i class="fas fa-plus mr-2"></i>編集</a>
+                            {{ $todo->getStatusText() }}
                         </td>
+                        <th>
+                            <a href="/todo/{{ $todo->id }}/edit" class="btn btn-success"><i class="fas fa-edit mr-2"></i>編集</a>
+                        </th>
+                        <th>
+                            <form action="/todo/{{ $todo->id }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt mr-2"></i>削除</button>
+                            </form>
+                        </th>
                     </tr>
                 @endforeach
                 </tbody>
